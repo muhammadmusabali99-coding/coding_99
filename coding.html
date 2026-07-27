@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern CSS Design</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    background:linear-gradient(135deg,#6a11cb,#2575fc);
+    overflow:hidden;
+}
+
+/* Animated Background */
+body::before{
+    content:"";
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:rgba(255,255,255,.1);
+    border-radius:50%;
+    top:-150px;
+    left:-150px;
+    filter:blur(30px);
+}
+
+body::after{
+    content:"";
+    position:absolute;
+    width:450px;
+    height:450px;
+    background:rgba(255,255,255,.08);
+    border-radius:50%;
+    bottom:-150px;
+    right:-150px;
+    filter:blur(30px);
+}
+
+.container{
+    position:relative;
+    width:420px;
+    padding:40px;
+    background:rgba(255,255,255,0.15);
+    border:1px solid rgba(255,255,255,.25);
+    backdrop-filter:blur(15px);
+    border-radius:25px;
+    box-shadow:0 15px 35px rgba(0,0,0,.3);
+    text-align:center;
+    color:white;
+    animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+h1{
+    margin-bottom:10px;
+    font-size:32px;
+}
+
+p{
+    opacity:.8;
+    margin-bottom:30px;
+}
+
+input{
+    width:100%;
+    padding:15px;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    font-size:18px;
+    margin-bottom:20px;
+    background:rgba(255,255,255,.2);
+    color:white;
+}
+
+input::placeholder{
+    color:#eee;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    color:white;
+    background:linear-gradient(45deg,#ff416c,#ff4b2b);
+    transition:.4s;
+}
+
+button:hover{
+    transform:translateY(-5px) scale(1.03);
+    box-shadow:0 10px 25px rgba(255,75,43,.5);
+}
+
+button:active{
+    transform:scale(.97);
+}
+
+#result{
+    margin-top:25px;
+    font-size:26px;
+    font-weight:bold;
+    transition:.5s;
+}
+
+/* Floating Cards */
+.cards{
+    display:flex;
+    justify-content:space-between;
+    margin-top:30px;
+    gap:10px;
+}
+
+.card{
+    flex:1;
+    background:rgba(255,255,255,.12);
+    border-radius:15px;
+    padding:15px;
+    transition:.4s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    background:rgba(255,255,255,.2);
+}
+
+.card h3{
+    font-size:18px;
+    margin-bottom:8px;
+}
+
+.card p{
+    font-size:14px;
+}
+
+.pass{
+    color:#00ff95;
+    text-shadow:0 0 15px #00ff95;
+}
+
+.fail{
+    color:#ff3b3b;
+    text-shadow:0 0 15px red;
+}
+
+@media(max-width:500px){
+
+.container{
+    width:90%;
+    padding:25px;
+}
+
+.cards{
+    flex-direction:column;
+}
+
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>Student Result</h1>
+
+<p>Enter your marks below</p>
+
+<input type="number" id="marks" placeholder="Enter Marks">
+
+<button onclick="checkResult()">Check Result</button>
+
+<div id="result"></div>
+
+<div class="cards">
+
+<div class="card">
+<h3>Passing</h3>
+<p>Marks ≥ 50</p>
+</div>
+
+<div class="card">
+<h3>Failing</h3>
+<p>Marks < 50</p>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function checkResult(){
+
+let marks=document.querySelector("#marks").value;
+let result=document.querySelector("#result");
+
+if(marks==""){
+    result.innerHTML="Enter Marks!";
+    result.className="";
+}
+else if(marks>=50){
+    result.innerHTML="✔ PASS";
+    result.className="pass";
+}
+else{
+    result.innerHTML="✖ FAIL";
+    result.className="fail";
+}
+
+}
+</script>
+
+</body>
+</html>
